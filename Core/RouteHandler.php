@@ -16,4 +16,14 @@ class RouteHandler {
         $this->controller = $controller;
         $this->action     = $action;
     }
+
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    public function getAction()
+    {
+        return $this->action;
+    }
 }

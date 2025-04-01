@@ -3,7 +3,6 @@
 namespace Core;
 
 use App\Interfaces\RequestDataInterface;
-use App\Interfaces\ControllerInterface;
 
 class Router {
     private $routes              = [];
@@ -43,6 +42,14 @@ class Router {
         $reqMethod = $this->requestData->getReqMethod();
         $reqUrl    = $this->requestData->getReqUrl();
 
-        
+        if (!isset($this->routes[$reqUrl])) {
+            $reqUrl = '/not_found';
+        }
+
+        $reqHandler = $this->routes[$reqUrl][$reqMethod];
+        $controller = $reqHandler->getController();
+        $action     = $reqHandler->getAction();
+
+        $controller->$action();
     }
 }

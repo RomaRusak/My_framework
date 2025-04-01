@@ -2,6 +2,7 @@
 use Core\Router;
 use Core\RequestData;
 use App\Controllers\HomeController;
+use App\Controllers\NotFoundController;
 use Core\RouteHandlerCreator;
 use Core\RouteHandler;
 
@@ -13,12 +14,12 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/vendor/autoload.php';
 
 $homeController      = new HomeController;
+$notFoundController  = new NotFoundController;
 
 $routeHandlerCreator = new RouteHandlerCreator(RouteHandler::class);
 $requestData         = new RequestData;
 $router              = new Router($requestData, $routeHandlerCreator);
 
-// $router->addRoute($homeController, 'index');
 $router
     ->addRoute([
         'controller'    => $homeController,
@@ -27,9 +28,15 @@ $router
         'requestMethod' => 'GET',
     ])
     ->addRoute([
-        'controller'    => $homeController,
+        'controller'    => $notFoundController,
         'action'        => 'index',
-        'url'           => '/',
+        'url'           => '/not_found',
+        'requestMethod' => 'GET',
+    ])
+    ->addRoute([
+        'controller'    => $notFoundController,
+        'action'        => 'index',
+        'url'           => '/not_found',
         'requestMethod' => 'POST',
     ]);
 

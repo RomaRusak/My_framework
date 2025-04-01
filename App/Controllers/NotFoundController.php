@@ -3,8 +3,8 @@
 namespace App\Controllers;
 use App\Interfaces\ControllerInterface;
 
-class HomeController implements ControllerInterface {
+class NotFoundController implements ControllerInterface {
     public function index() {
-        echo 'Home page';
+        echo 'Not Found!';
     }
 }
