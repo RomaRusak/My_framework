@@ -1,0 +1,17 @@
+{
+    "name": "roman/my_framework",
+    "authors": [
+        {
+            "name": "Rusak Raman",
+            "email": "romarusakr96@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core",
+            "App\\Interfaces\\": "App/Interfaces",
+            "App\\Controllers\\": "App/Controllers"
+        }
+    }
+}

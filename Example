@@ -1,0 +1,50 @@
+<?php
+
+class Router {
+    private $routes = [
+        '/'  => [
+            'GET' => ['controller'  => null, 'handler'  => 'index',],
+        ],
+        '/products'         => [
+            'GET'  => ['controller' => null, 'handler' => 'index',],
+            'POST' => ['controller' => null, 'handler' => 'store',],
+        ],
+        '/products/create'  => [
+            'GET' => ['controller'  => null, 'handler' => 'create',],
+        ],
+        'notFound'          => [
+            'GET'  => ['controller' => null, 'handler' => 'index',],
+            'POST' => ['controller' => null, 'handler' => 'index',],
+        ],
+    ];
+
+    public function __construct(
+        HomeController     $homeController, 
+        NotFoundController $notFoundController,
+        ProductsController $productsController
+        )
+    {
+        $this->routes['/']['GET']['controller']                 = $homeController;
+        $this->routes['notFound']['GET']['controller']          = $notFoundController;
+        $this->routes['notFound']['POST']['controller']         = $notFoundController;
+        $this->routes['/products']['GET']['controller']         = $productsController;
+        $this->routes['/products']['POST']['controller']        = $productsController;
+        $this->routes['/products/create']['GET']['controller']  = $productsController;
+        $this->routes['/products/create']['POST']['controller'] = $productsController;
+    }
+    
+    public function init() {
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        $requestedUrl  = $_SERVER['REQUEST_URI'];
+
+        if (isset($this->routes[$requestedUrl][$requestMethod])) {
+            $currentUrlHandler = $this->routes[$requestedUrl][$requestMethod];
+            $currentController = $currentUrlHandler['controller'];
+            $currentMethod     = $currentUrlHandler['handler'];
+    
+            $currentController->$currentMethod();
+        }
+
+    }
+}
+
