@@ -11,7 +11,9 @@
         "psr-4": {
             "Core\\": "Core",
             "App\\Interfaces\\": "App/Interfaces",
-            "App\\Controllers\\": "App/Controllers"
+            "App\\Controllers\\": "App/Controllers",
+            "Core\\DB\\": "Core/DB",
+            "App\\Models\\": "App/Models"
         }
     }
 }

@@ -5,6 +5,8 @@ use App\Controllers\HomeController;
 use App\Controllers\NotFoundController;
 use Core\RouteHandlerCreator;
 use Core\RouteHandler;
+use Core\DB\DBClass;
+use App\Models\Product;
 
 // errors
 ini_set('display_errors', 1);
@@ -12,6 +14,14 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+$db  = new DBClass;
+$db->init();
+$db->connectToDB();
+$PDO = $db->getPDO();
+
+$productModel = new Product($PDO);
+$productModel->getAll();
 
 $homeController      = new HomeController;
 $notFoundController  = new NotFoundController;

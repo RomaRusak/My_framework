@@ -1,8 +1,12 @@
 <?php
+namespace Core\DB;
 
-class Model {
+use PDO;
+use PDOException;
 
-    private $PDO              = null;
+class DBClass {
+    private $PDO = null;
+    private $iniFile = '/config.ini';
     private $dbConnectionData = [
         'host'     => '',
         'user'     => '',
@@ -10,20 +14,16 @@ class Model {
         'db'       => '',
     ];
 
-    public function __construct()
-    {
-        $config = parse_ini_file('./config.ini');
+    public function init() {
+        $config = parse_ini_file(__DIR__ . $this->iniFile);
         
         $this->dbConnectionData['host']     = $config['host'];
         $this->dbConnectionData['user']     = $config['user'];
         $this->dbConnectionData['password'] = $config['password'];
         $this->dbConnectionData['db']       = $config['db'];
-
-        $this->connectToDB();
     }
 
-    private function connectToDB()
-    {
+    public function connectToDB() {
         try {
             [
                 'host'     => $host,
@@ -40,7 +40,8 @@ class Model {
         }
     }
 
-    protected function getPDO() {
+    public function getPDO()
+    {
         return $this->PDO;
     }
 }
