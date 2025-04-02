@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Interfaces\ModelInterface;
-use Core\BaseModel;
+use Core\Basics\BaseModel;
 use PDO;
 
 class Product extends BaseModel implements ModelInterface {

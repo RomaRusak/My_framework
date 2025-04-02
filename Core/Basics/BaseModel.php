@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Core\Basics;
 use PDO;
 
 class BaseModel {

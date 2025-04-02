@@ -1,19 +1,20 @@
 <?php
-use Core\Router;
-use Core\RequestData;
+
+use Core\Router\Router;
+use Core\Router\RequestData;
 use App\Controllers\HomeController;
 use App\Controllers\NotFoundController;
-use Core\RouteHandlerCreator;
-use Core\RouteHandler;
+use Core\Router\RouteHandlerCreator;
+use Core\Router\RouteHandler;
 use Core\DB\DBClass;
 use App\Models\Product;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 // errors
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-require_once __DIR__ . '/vendor/autoload.php';
 
 $db  = new DBClass;
 $db->init();

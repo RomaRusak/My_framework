@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Core\Router;
 use App\Interfaces\RequestDataInterface;
 
 class RequestData implements RequestDataInterface {

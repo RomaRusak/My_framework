@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use Core\BaseController;
+use Core\Basics\BaseController;
 use App\Interfaces\ControllerInterface;
 
 class NotFoundController extends BaseController implements ControllerInterface {

@@ -13,7 +13,9 @@
             "App\\Interfaces\\": "App/Interfaces",
             "App\\Controllers\\": "App/Controllers",
             "Core\\DB\\": "Core/DB",
-            "App\\Models\\": "App/Models"
+            "App\\Models\\": "App/Models",
+            "Core\\Router\\": "Core/Router",
+            "Core\\Basics\\": "Core/Basics"
         }
     }
 }

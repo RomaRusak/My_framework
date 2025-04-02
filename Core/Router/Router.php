@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Core\Router;
 
 use App\Interfaces\RequestDataInterface;
 
@@ -37,7 +37,7 @@ class Router {
         $this->routes[$url][$requestMethod] = $routeHandler;
     }
 
-    public function handleRequest()
+    public function handleRequest(): void
     {
         $reqMethod = $this->requestData->getReqMethod();
         $reqUrl    = $this->requestData->getReqUrl();

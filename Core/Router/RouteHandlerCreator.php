@@ -1,8 +1,8 @@
 <?php
 
-namespace Core;
+namespace Core\Router;
 
-use Core\RouteHandler;
+use Core\Router\RouteHandler;
 use App\Interfaces\ControllerInterface;
 use Exception;
 
