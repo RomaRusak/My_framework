@@ -21,7 +21,7 @@ class ProductsController extends BaseController implements ControllerInterface {
         $this->productsService = $productsService;
     }
     
-    public function index()
+    public function index(): void
     {
         $allProducts = $this->productModel->getAll();
 
@@ -33,7 +33,7 @@ class ProductsController extends BaseController implements ControllerInterface {
         ]);
     }
 
-    public function create()
+    public function create(): void
     {
         $this->render([
             'basePage'    => 'layout',
@@ -62,7 +62,7 @@ class ProductsController extends BaseController implements ControllerInterface {
             return;
         }
         
-        $this->productModel->addProduct($validatedData);
+        $this->productModel->create($validatedData);
 
         $this->create();
 

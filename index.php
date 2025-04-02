@@ -10,6 +10,7 @@ use Core\Router\RouteHandler;
 use Core\DB\DBClass;
 use App\Models\Product;
 use App\Services\ProductsService;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 // errors

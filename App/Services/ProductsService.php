@@ -3,7 +3,7 @@
 namespace App\Services;
 
 class ProductsService {
-    public function validateDataBeforeInser($unvalidatedData) {
+    public function validateDataBeforeInser(array $unvalidatedData): array {
         $validatedData = [
             'productName'       => null, 
             'productPrice'      => null,
@@ -22,7 +22,7 @@ class ProductsService {
         return $validatedData;
     }
 
-    private function getErrors($key, $checkedParam) {
+    private function getErrors(string $key, string|int $checkedParam): array {
         $errors = [];
 
         $rules = [

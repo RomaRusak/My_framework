@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Interfaces\ModelInterface;
 use Core\Basics\BaseModel;
+use App\Interfaces\CreatableInterface;
 use PDO;
 use PDOException;
 
-class Product extends BaseModel implements ModelInterface {
+class Product extends BaseModel implements ModelInterface, CreatableInterface {
     public function __construct(PDO $PDO)
     {
         parent::__construct($PDO);
@@ -25,8 +26,8 @@ class Product extends BaseModel implements ModelInterface {
         }
     }
 
-    public function addProduct($productData) 
-    {   
+    public function create(array $productData) 
+    {
         try {
             ['productName' => $productName, 'productPrice' => $productPrice] = $productData;
             $query = "INSERT INTO `products` (product, price) VALUES (:productName, :productPrice)";

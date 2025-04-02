@@ -6,7 +6,7 @@ use Core\Basics\BaseController;
 use App\Interfaces\ControllerInterface;
 
 class HomeController extends BaseController implements ControllerInterface {
-    public function index() {
+    public function index(): void {
         $viewData = [
             'basePage' => 'layout',
             'title'    => 'home', 
