@@ -5,7 +5,7 @@ php_value error_reporting E_ALL
 RewriteEngine On
 RewriteBase /
 
-RewriteCond %{REQUEST_URI} !^/css/
+RewriteCond %{REQUEST_URI} !^/assets/
 
 RewriteCond %{REQUEST_URI} !^/index\.php$
 RewriteRule ^(.*)$ /index.php [L]

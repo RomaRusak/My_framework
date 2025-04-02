@@ -10,6 +10,7 @@ return array(
     'Core\\DB\\' => array($baseDir . '/Core/DB'),
     'Core\\Basics\\' => array($baseDir . '/Core/Basics'),
     'Core\\' => array($baseDir . '/Core'),
+    'App\\Services\\' => array($baseDir . '/App/Services'),
     'App\\Models\\' => array($baseDir . '/App/Models'),
     'App\\Interfaces\\' => array($baseDir . '/App/Interfaces'),
     'App\\Controllers\\' => array($baseDir . '/App/Controllers'),

@@ -7,6 +7,11 @@ use App\Interfaces\ControllerInterface;
 
 class HomeController extends BaseController implements ControllerInterface {
     public function index() {
-        echo 'Home page';
+        $viewData = [
+            'basePage' => 'layout',
+            'title'    => 'home', 
+            'content'  => 'home'
+        ];
+        $this->render($viewData);
     }
 }

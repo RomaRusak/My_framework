@@ -15,7 +15,8 @@
             "Core\\DB\\": "Core/DB",
             "App\\Models\\": "App/Models",
             "Core\\Router\\": "Core/Router",
-            "Core\\Basics\\": "Core/Basics"
+            "Core\\Basics\\": "Core/Basics",
+            "App\\Services\\": "App/Services"
         }
     }
 }

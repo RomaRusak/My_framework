@@ -7,6 +7,6 @@ use App\Interfaces\ControllerInterface;
 
 class NotFoundController extends BaseController implements ControllerInterface {
     public function index() {
-        echo 'Not Found!';
+        $this->render(['basePage' => 'notFound',]);
     }
 }

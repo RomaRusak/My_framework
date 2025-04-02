@@ -50,6 +50,6 @@ class Router {
         $controller = $reqHandler->getController();
         $action     = $reqHandler->getAction();
 
-        $controller->$action();
+        $controller->$action($this->requestData);
     }
 }
