@@ -11,14 +11,14 @@ class Templater {
         $this->viewData = $viewData;
     }
 
-    private function getContent($fileName)
+    private function getContent(string $fileName): string
     {
         $path = $_SERVER['DOCUMENT_ROOT'] . "/App/Views/$fileName.php";
 
         return file_get_contents($path);
     }
 
-    private function replacePlaceholders($content)
+    private function replacePlaceholders(string $content): string
     {
         foreach ($this->viewData as $key => $value) {
             if (strpos($content, "{{ $key }}")) {
@@ -28,42 +28,43 @@ class Templater {
 
         return $content;
     }
-    
-    private function addReqTemplates($content)
+
+    private function addTemplates(string $content, string $templateTypes): string
     {
-        preg_match_all('/\{\{\s*require\((.*?)\)\s*\}\}/', $content, $matches);
+        switch ($templateTypes) {
+            case 'included':
+                preg_match_all('/\{\{\s*include\((.*?)\)\s*\}\}/', $content, $matches);
+            break;
+            case 'required':
+                preg_match_all('/\{\{\s*require\((.*?)\)\s*\}\}/', $content, $matches);
+            break;
+            default:
+                return $content;
+        }
 
-        foreach($matches[0] as $key => $value) {
-            $reqTempName = $matches[1][$key];
-            $reqTempContent = $this->getContent($reqTempName);
-            $reqTempContent = $this->replacePlaceholders($reqTempContent);
+        $placeholders = $matches[0];
+        $templates    = $matches[1];
 
-            $content = str_replace($value, $reqTempContent, $content);
-            
-        } 
-        return $content;
-    }
-
-    private function includeTemplates($content)
-    {
-        preg_match_all('/\{\{\s*include\((.*?)\)\s*\}\}/', $content, $matches);
-
-        foreach($matches[0] as $key => $value) {
-            $tempName = $matches[1][$key];
-            
-            if (isset($this->viewData[$tempName])) {
-                $includedTempName    = $this->viewData[$tempName];
-                $includedTempContent = $this->getContent($includedTempName);
-                $includedTempContent = $this->replacePlaceholders($includedTempContent);
-
-                $content = str_replace($value, $includedTempContent, $content);
+        foreach($placeholders as $placeholderKey => $placeholder) {
+            switch($templateTypes) {
+                case 'included':
+                    $tempName = $this->viewData[$templates[$placeholderKey]];
+                break;
+                case 'required':
+                    $tempName =  $templates[$placeholderKey];
+                break;
             }
+            
+            $templateContent = $this->getContent($tempName);
+            $templateContent = $this->replacePlaceholders($templateContent);
+
+            $content = str_replace($placeholder, $templateContent, $content);
         } 
 
         return $content;
     }
 
-    public function render($viewData)
+    public function render(array $viewData): void
     {
         $this->setViewData($viewData);
 
@@ -71,13 +72,13 @@ class Templater {
         
         $templateContent = $this->getContent($basePageName);
         $templateContent = $this->replacePlaceholders($templateContent);
-        $templateContent = $this->includeTemplates($templateContent);
-        $templateContent = $this->addReqTemplates($templateContent);
+        $templateContent = $this->addTemplates($templateContent, 'included');
+        $templateContent = $this->addTemplates($templateContent, 'required');
 
         ob_start(); 
         eval('?>' . $templateContent);
         $renderedContent = ob_get_clean();
-
+        
         echo $renderedContent;
     }
 }
