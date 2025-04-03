@@ -1,7 +1,7 @@
-<h1>All Products</h1>
+<h1>{{ mainTitle }}</h1>
 <ul>
     <?php
-        foreach($allProducts as $product) {
+        foreach($viewData['allProducts'] as $product) {
             ?>
                 <li>
                     <div>

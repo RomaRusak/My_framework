@@ -7,16 +7,19 @@ use App\Interfaces\ControllerInterface;
 use App\Interfaces\ModelInterface;
 use App\Interfaces\RequestDataInterface;
 use App\Services\ProductsService;
+use Core\Templater\Templater;
 
 class ProductsController extends BaseController implements ControllerInterface {
     private $productModel    = null;
     private $productsService = null;
 
     public function __construct(
+        Templater       $templater,
         ModelInterface  $productModel,
         ProductsService $productsService
         )
     {
+        parent::__construct($templater);
         $this->productModel    =  $productModel;
         $this->productsService = $productsService;
     }
@@ -25,20 +28,22 @@ class ProductsController extends BaseController implements ControllerInterface {
     {
         $allProducts = $this->productModel->getAll();
 
-        $this->render([
+        $this->templater->render([
             'basePage'    => 'layout',
-            'title'       => 'products', 
-            'content'     => 'products',
+            'pageTitle'   => 'products', 
+            'content'     => 'Templates/products',
+            'mainTitle'   => 'All Products',
             'allProducts' =>  $allProducts,
         ]);
     }
 
     public function create(): void
     {
-        $this->render([
-            'basePage'    => 'layout',
-            'title'       => 'create_product', 
-            'content'     => 'productsCreate',
+        $this->templater->render([
+            'basePage'  => 'layout',
+            'pageTitle' => 'create_product', 
+            'mainTitle' => 'Add product',
+            'content'   => 'Templates/productsCreate',
         ]);
     }
 
@@ -52,10 +57,11 @@ class ProductsController extends BaseController implements ControllerInterface {
         ]);
 
         if (!$validatedData['areAllParamsVal']) {
-            $this->render([
+            $this->templater->render([
                 'basePage'      => 'layout',
-                'title'         => 'create_product', 
-                'content'       => 'productsCreate',
+                'pageTitle'     => 'create_product', 
+                'content'       => 'Templates/productsCreate',
+                'mainTitle' => 'Add product',
                 'validatedData' => $validatedData,
             ]);
             
