@@ -14,7 +14,6 @@ class BaseController {
     public function render(array $viewData) 
     {
         extract($viewData);
-        var_dump($viewData);
 
         $basePagePath        = $_SERVER['DOCUMENT_ROOT'] . "/App/Views/$basePage.php";
         $isBasePageExists    = file_exists($basePagePath);
