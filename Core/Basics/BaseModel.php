@@ -10,4 +10,4 @@ class BaseModel {
     {
         $this->PDO = $PDO;
     }
-}
+} 

@@ -1,30 +1,14 @@
 <?php
 
 namespace Core\Basics;
+use Core\Templater\Templater;
 
 class BaseController {
 
-    private $notFoundPagePath = null;
+    protected $templater = null;
 
-    public function __construct()
+    public function __construct($templater)
     {
-        $this->notFoundPagePath = $_SERVER['DOCUMENT_ROOT'] . "/App/Views/notFound.php";
-    }
-
-    public function render(array $viewData) 
-    {
-        extract($viewData);
-
-        $basePagePath        = $_SERVER['DOCUMENT_ROOT'] . "/App/Views/$basePage.php";
-        $isBasePageExists    = file_exists($basePagePath);
-
-        switch ($isBasePageExists) {
-            case true:
-                require_once $basePagePath;
-            break;
-            case false:
-                require_once $this->notFoundPagePath;
-            break;
-        }   
+        $this->templater = $templater;
     }
 }

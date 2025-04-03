@@ -4,14 +4,21 @@ namespace App\Controllers;
 
 use Core\Basics\BaseController;
 use App\Interfaces\ControllerInterface;
+use Core\Templater\Templater;
 
 class HomeController extends BaseController implements ControllerInterface {
+    public function __construct(Templater $templater)
+    {
+        parent::__construct($templater);
+    }
+
     public function index(): void {
         $viewData = [
-            'basePage' => 'layout',
-            'title'    => 'home', 
-            'content'  => 'home'
+            'basePage'  => 'layout',
+            'pageTitle' => 'home', 
+            'content'   => 'Templates/home',
+            'mainTitle' => 'Home page',
         ];
-        $this->render($viewData);
+        $this->templater->render($viewData);
     }
 }

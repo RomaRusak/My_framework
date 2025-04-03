@@ -16,7 +16,8 @@
             "App\\Models\\": "App/Models",
             "Core\\Router\\": "Core/Router",
             "Core\\Basics\\": "Core/Basics",
-            "App\\Services\\": "App/Services"
+            "App\\Services\\": "App/Services",
+            "Core\\Templater\\": "Core/Templater"
         }
     }
 }

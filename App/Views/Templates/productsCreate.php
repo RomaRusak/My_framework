@@ -1,21 +1,21 @@
-<h1>Add product</h1>
+<h1>{{ mainTitle }}</h1>
     <div>
         <form action="/products" method="POST">
             <div>
                 <label for="productName">Product name</label>
                 <input 
-                value="<?= isset($validatedData['productName']) ? $validatedData['productName']: '' ?>"
+                value="<?= isset($viewData['validatedData']['productName']) ? $viewData['validatedData']['productName']: '' ?>"
                 type="text" 
                 name="productName" 
                 id="productName" 
                 required
                 >
                 <?php
-                    if (isset($validatedData['productName']) && count($validatedData['productNameErrors'])) {
+                    if (isset($viewData['validatedData']['productName']) && count($viewData['validatedData']['productNameErrors'])) {
                         ?>
                             <ul>
                                 <?php
-                                    foreach($validatedData['productNameErrors'] as $error) {
+                                    foreach($viewData['validatedData']['productNameErrors'] as $error) {
                                         ?>
                                         <li>
                                             <p><?= $error ?></p>
@@ -31,18 +31,18 @@
             <div>
                 <label for="productPrice">Product price</label>
                 <input 
-                value="<?= isset($validatedData['productPrice']) ? $validatedData['productPrice']: '' ?>"
+                value="<?= isset($viewData['validatedData']['productPrice']) ? $viewData['validatedData']['productPrice']: '' ?>"
                 type="number" 
                 id="productPrice" 
                 name="productPrice" 
                 required
                 >
                 <?php
-                    if (isset($validatedData['productPriceErrors']) && count($validatedData['productPriceErrors'])) {
+                    if (isset($viewData['validatedData']['productPriceErrors']) && count($viewData['validatedData']['productPriceErrors'])) {
                         ?>
                             <ul>
                                 <?php
-                                    foreach($validatedData['productPriceErrors'] as $error) {
+                                    foreach($viewData['validatedData']['productPriceErrors'] as $error) {
                                         ?>
                                         <li>
                                             <p><?= $error ?></p>

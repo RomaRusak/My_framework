@@ -10,6 +10,7 @@ use Core\Router\RouteHandler;
 use Core\DB\DBClass;
 use App\Models\Product;
 use App\Services\ProductsService;
+use Core\Templater\Templater;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -27,9 +28,11 @@ $productModel        = new Product($PDO);
 
 $productsService     = new ProductsService();
 
-$homeController      = new HomeController;
-$notFoundController  = new NotFoundController;
-$productsController  = new ProductsController($productModel, $productsService);
+$templater           = new Templater;
+
+$homeController      = new HomeController($templater);
+$notFoundController  = new NotFoundController($templater);
+$productsController  = new ProductsController($templater, $productModel, $productsService);
 
 $routeHandlerCreator = new RouteHandlerCreator(RouteHandler::class);
 $requestData         = new RequestData;
