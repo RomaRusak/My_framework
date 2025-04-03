@@ -46,7 +46,7 @@ class ProductsController extends BaseController implements ControllerInterface {
     {
         $POSTParams = $requestData->getPOSTParams();
         
-        $validatedData = $this->productsService->validateDataBeforeInser([
+        $validatedData = $this->productsService->validateDataBeforeInsert([
             'productName'  => $POSTParams['productName'],
             'productPrice' => $POSTParams['productPrice'],
         ]);

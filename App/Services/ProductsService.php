@@ -3,7 +3,7 @@
 namespace App\Services;
 
 class ProductsService {
-    public function validateDataBeforeInser(array $unvalidatedData): array {
+    public function validateDataBeforeInsert(array $unvalidatedData): array {
         $validatedData = [
             'productName'       => null, 
             'productPrice'      => null,
