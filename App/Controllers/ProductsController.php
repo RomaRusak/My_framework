@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Core\Basics\BaseController;
 use App\Interfaces\ControllerInterface;
 use App\Interfaces\ModelInterface;
-use App\Interfaces\RequestDataInterface;
+use Core\Router\RequestData;
 use App\Services\ProductsService;
 use App\Services\ProductsServiceUI;
 use Core\Templater\Templater;
@@ -39,7 +39,7 @@ class ProductsController extends BaseController implements ControllerInterface {
             'pageTitle'       => 'products', 
             'content'         => 'Templates/products',
             'mainTitle'       => 'All Products',
-            'allProducts' =>  $allProductsHTML,
+            'allProducts'     =>  $allProductsHTML,
         ]);
     }
 
@@ -56,7 +56,7 @@ class ProductsController extends BaseController implements ControllerInterface {
         ]);
     }
 
-    public function store(RequestDataInterface $requestData)
+    public function store(RequestData $requestData)
     {
         $POSTParams = $requestData->getPOSTParams();
         

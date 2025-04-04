@@ -2,15 +2,13 @@
 
 namespace Core\Router;
 
-use App\Interfaces\RequestDataInterface;
-
 class Router {
     private $routes              = [];
     private $requestData         = null;
     private $routeHandlerCreator = null;
 
     public function __construct(
-        RequestDataInterface  $requestData,
+        RequestData  $requestData,
         RouteHandlerCreator   $routeHandlerCreator,
     )
     {

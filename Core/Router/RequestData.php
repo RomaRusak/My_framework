@@ -1,9 +1,8 @@
 <?php
 
 namespace Core\Router;
-use App\Interfaces\RequestDataInterface;
 
-class RequestData implements RequestDataInterface {
+class RequestData {
     private $reqMethod  = null;
     private $reqUrl     = null;
     private $GETParams  = null;
