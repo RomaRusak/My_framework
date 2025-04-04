@@ -1,18 +1,7 @@
 <h1>{{ mainTitle }}</h1>
-<ul>
-    <?php
-        foreach($viewData['allProducts'] as $product) {
-            ?>
-                <li>
-                    <div>
-                        product: <?= $product['product'] ?>
-                        price: <?= $product['price'] ?>
-                    </div>
-                </li>
-            <?php
-        }
-    ?>
-</ul>
+<div>
+    {{ allProducts }}
+</div>
 
 <a href="/products/create">
     <button>Add Product</button>

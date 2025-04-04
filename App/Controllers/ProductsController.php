@@ -7,43 +7,52 @@ use App\Interfaces\ControllerInterface;
 use App\Interfaces\ModelInterface;
 use App\Interfaces\RequestDataInterface;
 use App\Services\ProductsService;
+use App\Services\ProductsServiceUI;
 use Core\Templater\Templater;
 
 class ProductsController extends BaseController implements ControllerInterface {
-    private $productModel    = null;
-    private $productsService = null;
+    private $productModel      = null;
+    private $productsService   = null;
+    private $productsServiceUI = null;
 
     public function __construct(
         Templater       $templater,
         ModelInterface  $productModel,
-        ProductsService $productsService
+        ProductsService $productsService,
+        ProductsServiceUI $productsServiceUI
         )
     {
         parent::__construct($templater);
-        $this->productModel    =  $productModel;
-        $this->productsService = $productsService;
+
+        $this->productModel      =  $productModel;
+        $this->productsService   = $productsService;
+        $this->productsServiceUI = $productsServiceUI;
     }
     
     public function index(): void
     {
-        $allProducts = $this->productModel->getAll();
+        $allProducts     = $this->productModel->getAll();
+        $allProductsHTML = $this->productsServiceUI->getAllProductsHTML($allProducts, 'ul');
 
         $this->templater->render([
-            'basePage'    => 'layout',
-            'pageTitle'   => 'products', 
-            'content'     => 'Templates/products',
-            'mainTitle'   => 'All Products',
-            'allProducts' =>  $allProducts,
+            'basePage'        => 'layout',
+            'pageTitle'       => 'products', 
+            'content'         => 'Templates/products',
+            'mainTitle'       => 'All Products',
+            'allProducts' =>  $allProductsHTML,
         ]);
     }
 
     public function create(): void
     {
+        $productFormHTML = $this->productsServiceUI->getProductFormHTML();
+        
         $this->templater->render([
-            'basePage'  => 'layout',
-            'pageTitle' => 'create_product', 
-            'mainTitle' => 'Add product',
-            'content'   => 'Templates/productsCreate',
+            'basePage'    => 'layout',
+            'pageTitle'   => 'create_product', 
+            'mainTitle'   => 'Add product',
+            'content'     => 'Templates/productsCreate',
+            'productForm' =>  $productFormHTML,
         ]);
     }
 
@@ -57,12 +66,14 @@ class ProductsController extends BaseController implements ControllerInterface {
         ]);
 
         if (!$validatedData['areAllParamsVal']) {
+            $productFormHTML = $this->productsServiceUI->getProductFormHTML($validatedData);
+
             $this->templater->render([
-                'basePage'      => 'layout',
-                'pageTitle'     => 'create_product', 
-                'content'       => 'Templates/productsCreate',
-                'mainTitle' => 'Add product',
-                'validatedData' => $validatedData,
+                'basePage'    => 'layout',
+                'pageTitle'   => 'create_product', 
+                'mainTitle'   => 'Add product',
+                'content'     => 'Templates/productsCreate',
+                'productForm' =>  $productFormHTML,
             ]);
             
             return;

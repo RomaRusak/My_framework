@@ -27,7 +27,7 @@ class RequestData implements RequestDataInterface {
         return $this->reqUrl;
     }
 
-    public function getGetParams() 
+    public function getGETParams() 
     {
         return $this->GETParams;
     }

@@ -75,10 +75,6 @@ class Templater {
         $templateContent = $this->addTemplates($templateContent, 'included');
         $templateContent = $this->addTemplates($templateContent, 'required');
 
-        ob_start(); 
-        eval('?>' . $templateContent);
-        $renderedContent = ob_get_clean();
-        
-        echo $renderedContent;
+        echo $templateContent;
     }
 }
